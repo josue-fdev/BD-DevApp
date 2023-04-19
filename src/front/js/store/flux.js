@@ -7,11 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         {
           id: 1,
           name: "Rock",
-          rule: "A player who decides to play rock will beat another player who has chosen scissors ( rock crushes scissors or breaks scissors or sometimes blunts scissors), but will lose to one who has played paper (paper covers rock)",
+          rule: "Rock crushes scissors or breaks scissors ), but will lose to one who has played paper (paper covers rock)",
         },
         {
           name: "Paper",
-          rule: "A play of paper will win against who a play of rock but scissors cuts paper)",
+          rule: "A play of paper will wins against who a play of rock but scissors cuts paper)",
         },
         {
           name: "Scissors",
@@ -23,34 +23,42 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       // Use getActions to call a function within a fuction
 
-      storePlayerValue: (playerElection) => {
+      storePlayerValue: (playerElection, contadorJugadores) => {
         const store = getStore();
+        let pl = playerElection;
+        let contadorPlayers = contadorJugadores;
+        console.log(
+          "el valor de pl es: " +
+            pl +
+            " y el valor del contador es: " +
+            contadorPlayers
+        );
         var playerElect = store.playerValues;
 
-        if (playerElect.length === 0) {
-          playerElect[0] = playerElection;
+        if (contadorPlayers === 1) {
+          playerElect[0] = pl;
           setStore({ playerValues: playerElect });
           return console.log(
-            "tiene de largo " +
-              playerElect.length +
-              " y el valor es " +
-              playerElect[0]
+            "El valor obtenido en la posicion 0 del playerElect es: " +
+              playerElect[0] +
+              " y el contador es: " +
+              contadorPlayers
           );
         }
-        if (playerElect.length === 1) {
-          playerElect[1] = playerElection;
-          let playersArray = playerElect;
-          playerElect = [];
-          setStore({ playerValues: [] });
-          return console.log(
-            "tiene de largo " +
-              playersArray.length +
-              " y el valor es " +
-              playersArray[1]
-          );
-        }
+        /*if (playerElect.length === 2);
+        playerElect[1] = playerElection;
+        let playersArray = [];
+        playersArray = playerElect;
+        console.log(" deberia de tener de largo 2: " + playersArray.length);
+        playerElect = [];
+        setStore({ playerValues: [] });
+        return console.log(
+          "tiene de largo " +
+            playersArray.length +
+            " y el valor es " +
+            playersArray[1]
+        );*/
       },
-
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -63,22 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Error loading message from backend", error);
         }
       },
-      changeColor: (index, color) => {
-        //get the store
-        const store = getStore();
-
-        //we have to loop the entire demo array to look for the respective index
-        //and change its color
-        const demo = store.demo.map((elm, i) => {
-          if (i === index) elm.background = color;
-          return elm;
-        });
-
-        //reset the global store
-        setStore({ demo: demo });
-      },
     },
   };
 };
-
 export default getState;

@@ -16,36 +16,38 @@ library.add(faHandBackFist, faHand, faHandScissors);
 
 export const CardsGroup = () => {
   const { store, actions } = useContext(Context);
-  const [buttonId, setButtonId] = useState("");
+  const [buttonId, setButtonId] = useState(buttonId=0);
+  const [contador, setContador] = useState(contador=0);
 
   return (
-    <div className="container d-flex">
+    <div className="container d-flex justify-content-center">
       <div className="row flexCards">
-        {store.gameRules.map((elemento) => {
+        {store.gameRules.map((item, index) => {
           return (
             <div className="col-4">
               <Card
                 style={{ width: "15rem", height: "20rem" }}
-                key={elemento.id}
+                key={index}
                 className="cards"
               >
                 <Card.Img variant="top" />
                 <FontAwesomeIcon
                   icon="fa-hand"
                   className="hand"
-                  id={elemento.name}
+                  id={item.name}
                 />
                 <Card.Body>
-                  <Card.Title>{elemento.name}</Card.Title>
-                  <Card.Text>{elemento.rule}</Card.Text>
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text>{item.rule}</Card.Text>
                   <Button
                     variant="primary"
                     onClick={() => {
-                      setButtonId(elemento.name);
-                      actions.storePlayerValue(buttonId);
+                      setButtonId(index + 1);
+                      setContador(contador + 1);
+                      actions.storePlayerValue(buttonId, contador);
                     }}
                   >
-                    Go for {elemento.name}
+                    Go for {item.name}
                   </Button>
                 </Card.Body>
               </Card>
