@@ -11,13 +11,20 @@ import {
   faHand,
   faHandScissors,
 } from "@fortawesome/free-solid-svg-icons";
-
+let icons = [faHandBackFist, faHand, faHandScissors];
 library.add(faHandBackFist, faHand, faHandScissors);
+console.log(icons);
 
-export const CardsGroup = () => {
+export const CardsGroup = (icons) => {
   const { store, actions } = useContext(Context);
-  const [buttonId, setButtonId] = useState(buttonId=0);
-  const [contador, setContador] = useState(contador=0);
+  const [buttonId, setButtonId] = useState(0);
+  const [contador, setContador] = useState(0);
+
+  const OnButtonEvent = () => {
+    setButtonId(index + 1);
+    setContador(contador + 1);
+    actions.storePlayerValue(buttonId, contador);
+  };
 
   return (
     <div className="container d-flex justify-content-center">
@@ -32,21 +39,14 @@ export const CardsGroup = () => {
               >
                 <Card.Img variant="top" />
                 <FontAwesomeIcon
-                  icon="fa-hand"
+                  icon={icons[index]}
                   className="hand"
                   id={item.name}
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>{item.rule}</Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => {
-                      setButtonId(index + 1);
-                      setContador(contador + 1);
-                      actions.storePlayerValue(buttonId, contador);
-                    }}
-                  >
+                  <Button variant="primary" onClick={OnButtonEvent}>
                     Go for {item.name}
                   </Button>
                 </Card.Body>
