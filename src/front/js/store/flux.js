@@ -23,18 +23,23 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
       // Use getActions to call a function within a fuction
 
-      storePlayerValue: (playerElection, contadorJugadores) => {
+      storePlayerValue: (buttonId, counter) => {
         const store = getStore();
-        let pl = playerElection;
-        let contadorPlayers = contadorJugadores;
-        console.log(
-          "el valor de pl es: " +
-            pl +
-            " y el valor del contador es: " +
-            contadorPlayers
-        );
+        let playerElection = buttonId;
+        let counterPlayers = counter;
+        store.playerValues = counterPlayers;
         var playerElect = store.playerValues;
 
+        console.log(
+          "el valor de playerElection es: " +
+            playerElection +
+            " y el valor del contador es: " +
+            counterPlayers +
+            " el valor del store.playerValues es: " +
+            playerElect
+        );
+
+        /*
         if (contadorPlayers === 1) {
           playerElect[0] = pl;
           setStore({ playerValues: playerElect });
@@ -45,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               contadorPlayers
           );
         }
-        /*if (playerElect.length === 2);
+        if (playerElect.length === 2);
         playerElect[1] = playerElection;
         let playersArray = [];
         playersArray = playerElect;
@@ -57,6 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             playersArray.length +
             " y el valor es " +
             playersArray[1]
+
         );*/
       },
       getMessage: async () => {

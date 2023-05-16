@@ -17,18 +17,20 @@ console.log(icons);
 
 export const CardsGroup = (icons) => {
   const { store, actions } = useContext(Context);
-  const [buttonId, setButtonId] = useState(0);
-  const [contador, setContador] = useState(0);
+  const [buttonId, setButtonId] = useState(buttonName);
+  const [counter, setCounter] = useState(0);
 
-  const OnButtonEvent = () => {
-    setButtonId(index + 1);
-    setContador(contador + 1);
-    actions.storePlayerValue(buttonId, contador);
-  };
+  function onButtonEvent(name, counter) {
+    setButtonId(name);
+    setCounter(counter);
+    actions.storePlayerValue(buttonId, counter);
+  }
+
+  let buttonName = buttonId;
 
   return (
     <div className="container d-flex justify-content-center">
-      <div className="row flexCards">
+      <div className="row d-flex flexCards">
         {store.gameRules.map((item, index) => {
           return (
             <div className="col-4">
@@ -39,14 +41,17 @@ export const CardsGroup = (icons) => {
               >
                 <Card.Img variant="top" />
                 <FontAwesomeIcon
-                  icon={icons[index]}
+                  icon={icons.iconName}
                   className="hand"
                   id={item.name}
                 />
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>{item.rule}</Card.Text>
-                  <Button variant="primary" onClick={OnButtonEvent}>
+                  <Button
+                    variant="primary"
+                    onClick={() => onButtonEvent(item.name, counter)}
+                  >
                     Go for {item.name}
                   </Button>
                 </Card.Body>
