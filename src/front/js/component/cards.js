@@ -1,23 +1,28 @@
+//react dependencies
 import React, { useContext, useState } from "react";
+import "../../styles/cards.css";
 import { Context } from "../store/appContext";
-//importe componentes desde fontawesome
+//bootstrap dependencies
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+//fontawesome api icons library setttings
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { library } from "@fortawesome/fontawesome-svg-core";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import {
   faHandBackFist,
   faHand,
   faHandScissors,
 } from "@fortawesome/free-solid-svg-icons";
-let icons = [faHandBackFist, faHand, faHandScissors];
 library.add(faHandBackFist, faHand, faHandScissors);
-console.log(icons);
+const hand = icon(faHand);
+const handScissors = icon(faHandScissors);
+const handBackFist = icon(faHandBackFist);
+const iconsArray = [handBackFist, hand, handScissors];
 
-export const CardsGroup = (icons) => {
+//cardsList component
+export function CardsList() {
   const { store, actions } = useContext(Context);
-  const [buttonId, setButtonId] = useState(buttonName);
+  const [buttonId, setButtonId] = useState(0);
   const [counter, setCounter] = useState(0);
 
   function onButtonEvent(name, counter) {
@@ -25,41 +30,34 @@ export const CardsGroup = (icons) => {
     setCounter(counter);
     actions.storePlayerValue(buttonId, counter);
   }
-
-  let buttonName = buttonId;
-
   return (
-    <div className="container d-flex justify-content-center">
-      <div className="row d-flex flexCards">
-        {store.gameRules.map((item, index) => {
-          return (
-            <div className="col-4">
-              <Card
-                style={{ width: "15rem", height: "20rem" }}
-                key={index}
-                className="cards"
+    <>
+      {store.gameRules.map((item, index) => {
+        <li className="col-4" key={index}>
+          <Card
+            style={{ width: "15rem", height: "20rem" }}
+            key={index}
+            className="cards"
+          >
+            <Card.Img variant="top" />
+            <FontAwesomeIcon
+              icon={iconsArray[index]}
+              className="iconHands"
+              id={item.name}
+            />
+            <Card.Body>
+              <Card.Title>{item.name}</Card.Title>
+              <Card.Text>{item.rule}</Card.Text>
+              <Button
+                variant="primary"
+                onClick={() => onButtonEvent(item.name, counter)}
               >
-                <Card.Img variant="top" />
-                <FontAwesomeIcon
-                  icon={icons.iconName}
-                  className="hand"
-                  id={item.name}
-                />
-                <Card.Body>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>{item.rule}</Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => onButtonEvent(item.name, counter)}
-                  >
-                    Go for {item.name}
-                  </Button>
-                </Card.Body>
-              </Card>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+                Go for {item.name}
+              </Button>
+            </Card.Body>
+          </Card>
+        </li>
+      })}
+    </>
   );
-};
+}

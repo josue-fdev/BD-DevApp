@@ -5,26 +5,13 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+};
 .titulo {
   margin-bottom: 50px;
-}
-.handBack,
-.hand,
-.hand-scissors {
-  font-size: 50px;
-  padding: 2rem;
+  color: black;
 }
 
-.handBack:hover,
-.hand:hover,
-.hand-scissors:hover {
-  background: "red";
-}
-
-.flexCards {
-  display: "flex";
-  justify-content: center;
-}
-.cards {
-  max-height: 25rem;
-}
