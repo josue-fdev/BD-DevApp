@@ -10,10 +10,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           rule: "Rock crushes scissors or breaks scissors ), but will lose to one who has played paper (paper covers rock)",
         },
         {
+          id: 2,
           name: "Paper",
           rule: "A play of paper will wins against who a play of rock but scissors cuts paper)",
         },
         {
+          id: 3,
           name: "Scissors",
           rule: "Play of scissors (scissors cuts paper), but are destroy by rock.",
         },
@@ -27,21 +29,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         let playerElection = buttonId;
         let counterPlayers = counter;
-        store.playerValues = counterPlayers;
-        var playerElect = store.playerValues;
+        //store.playerValues = counterPlayers
+        //var playerElect = store.playerValues;
+        console.log(counterPlayers);
 
-        console.log(
-          "el valor de playerElection es: " +
-            playerElection +
-            " y el valor del contador es: " +
-            counterPlayers +
-            " el valor del store.playerValues es: " +
-            playerElect
-        );
-
-        /*
-        if (contadorPlayers === 1) {
-          playerElect[0] = pl;
+        /*if (store.playerValues.length === 1) {
+          playerElect[0] = playerElection;
           setStore({ playerValues: playerElect });
           return console.log(
             "El valor obtenido en la posicion 0 del playerElect es: " +
@@ -49,21 +42,22 @@ const getState = ({ getStore, getActions, setStore }) => {
               " y el contador es: " +
               contadorPlayers
           );
-        }
-        if (playerElect.length === 2);
-        playerElect[1] = playerElection;
-        let playersArray = [];
-        playersArray = playerElect;
-        console.log(" deberia de tener de largo 2: " + playersArray.length);
-        playerElect = [];
-        setStore({ playerValues: [] });
-        return console.log(
-          "tiene de largo " +
-            playersArray.length +
-            " y el valor es " +
-            playersArray[1]
-
-        );*/
+        }*/
+        /*if (counterPlayers === 2) {
+          playerElect[1] = playerElection;
+          let playersArray = [];
+          playersArray = playerElect;
+          console.log(" deberia de tener de largo 2: " + playersArray.length);
+          playerElect = [];
+          contadorPlayers = 0;
+          setStore({ playerValues: [] });
+          return console.log(
+            "tiene de largo " +
+              playersArray.length +
+              " y el valor es " +
+              playersArray[1]
+          );
+        }*/
       },
       getMessage: async () => {
         try {

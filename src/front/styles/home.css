@@ -7,11 +7,13 @@
 */
 .container {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column;
   justify-content: space-evenly;
-};
+}
 .titulo {
   margin-bottom: 50px;
   color: black;
 }
-
+.ulListCards {
+  list-style-type: none;
+}

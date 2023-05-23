@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { CardsList } from "../component/cards.js";
+import { CardsList } from "../component/cards";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -10,7 +10,7 @@ export const Home = () => {
     <main className="text-center mt-5">
       <h1 className="titulo">Welcome to a classic handly game</h1>
       <section className="container">
-        <ul className="row">
+        <ul className="ulListCards row">
           <CardsList />
         </ul>
       </section>

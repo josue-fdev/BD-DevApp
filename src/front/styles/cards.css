@@ -1,6 +1,7 @@
 .cards {
   max-height: 25rem;
-};
+  width: 15rem;
+}
 .iconHands {
   font-size: 50px;
   padding: 2rem;

@@ -1,11 +1,10 @@
-//react dependencies
-import React, { useContext, useState } from "react";
+//to get react dependencies
+import React, { useContext } from "react";
 import "../../styles/cards.css";
 import { Context } from "../store/appContext";
-//bootstrap dependencies
-import Button from "react-bootstrap/Button";
+//to get bootstrap dependencies
 import Card from "react-bootstrap/Card";
-//fontawesome api icons library setttings
+//to set fontawesome api icons library
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -18,27 +17,18 @@ const hand = icon(faHand);
 const handScissors = icon(faHandScissors);
 const handBackFist = icon(faHandBackFist);
 const iconsArray = [handBackFist, hand, handScissors];
+//to get the button component
+import { Button } from "./button";
 
 //cardsList component
 export function CardsList() {
   const { store, actions } = useContext(Context);
-  const [buttonId, setButtonId] = useState(0);
-  const [counter, setCounter] = useState(0);
 
-  function onButtonEvent(name, counter) {
-    setButtonId(name);
-    setCounter(counter);
-    actions.storePlayerValue(buttonId, counter);
-  }
   return (
     <>
       {store.gameRules.map((item, index) => {
         <li className="col-4" key={index}>
-          <Card
-            style={{ width: "15rem", height: "20rem" }}
-            key={index}
-            className="cards"
-          >
+          <Card key={index} className="cards">
             <Card.Img variant="top" />
             <FontAwesomeIcon
               icon={iconsArray[index]}
@@ -48,16 +38,12 @@ export function CardsList() {
             <Card.Body>
               <Card.Title>{item.name}</Card.Title>
               <Card.Text>{item.rule}</Card.Text>
-              <Button
-                variant="primary"
-                onClick={() => onButtonEvent(item.name, counter)}
-              >
-                Go for {item.name}
-              </Button>
+              <Button itemName={item.name} />
             </Card.Body>
           </Card>
-        </li>
+        </li>;
       })}
+      ;
     </>
   );
 }
